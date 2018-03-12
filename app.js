@@ -7,6 +7,29 @@ app.get('/', (req,res,next) => {
     res.send("Welcom to Wikistack!");
 })
 
-app.listen(3000, () => {
-    console.log("Listening at port 3000!");
+const models = require('./models');
+
+
+// models.db.sync({force: true})
+
+// models.db.sync()
+// .then(function () {
+//     console.log('All tables created!');
+//     app.listen(3000, function () {
+//         console.log('Server is listening on port 3000!');
+//     });
+// })
+// .catch(console.error.bind(console));
+
+models.User.sync()
+.then(function () {
+    console.log('User table created!');
+    return models.Page.sync();
 })
+.then(function () {
+    console.log('Page table created!');
+    app.listen(3000, function () {
+        console.log('Server is listening on port 3000!');
+    });
+})
+.catch(console.error.bind(console));
