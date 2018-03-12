@@ -5,6 +5,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
+    console.log("request body: ", req.body);
     res.json(req.body);
 })
 

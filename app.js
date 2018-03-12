@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express();
 const nunjucks = require('nunjucks'); 
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
 const env = nunjucks.configure('views', {noCache: true});
 // have res.render work with html files
@@ -10,6 +12,9 @@ app.engine('html', nunjucks.render);
 
 app.use(express.static('public'));
 app.use(express.static('views')); 
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 const models = require('./models');
 const routes = require('./routes'); 
