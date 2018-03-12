@@ -4,6 +4,20 @@ const db = new Sequelize('postgres://localhost:5432/wikistack', {
 });
 
 
+function generateUrlTitle(string) {
+    let newStr = '';
+    if(!string) {
+        return Math.random().toString(36).substring(2, 7);
+    }
+    else {
+        let newStr = string.replace(/\s/g, '_').replace(/[^a-zA-Z0-9_]/g, "");
+        ;
+    }
+    return newStr
+}
+
+console.log(generateUrlTitle(""));
+
 const Page = db.define('page', {
     title:  {
         type: Sequelize.STRING,
