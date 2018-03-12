@@ -21,10 +21,10 @@ const models = require('./models');
 // })
 // .catch(console.error.bind(console));
 
-models.User.sync()
+models.User.sync({force: true})
 .then(function () {
     console.log('User table created!');
-    return models.Page.sync();
+    return models.Page.sync({force: true});
 })
 .then(function () {
     console.log('Page table created!');
